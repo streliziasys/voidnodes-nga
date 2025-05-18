@@ -1,7 +1,7 @@
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import PaidPlanCard from "./PaidPlanCard";
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 
 const PAID_PLANS = [
   {
@@ -57,14 +57,9 @@ const PaidPlansSection = () => {
       ref={sectionRef}
       className="container mx-auto px-4 relative z-10 max-w-7xl"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {PAID_PLANS.map((plan, index) => (
-          <motion.div
-            key={plan.name}
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-          >
+          <div key={plan.name}>
             <PaidPlanCard
               name={plan.name}
               price={plan.price}
@@ -73,62 +68,62 @@ const PaidPlansSection = () => {
               storage={plan.storage}
               index={index}
             />
-          </motion.div>
+          </div>
         ))}
       </div>
       
-      <div className="mt-12 space-y-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
-          className="glass-card rounded-xl p-6"
-        >
-          <h3 className="text-xl font-bold text-white mb-4">Features</h3>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-300">
+      <div className="mt-16 space-y-8">
+        <div className="glass-card rounded-xl p-8 border border-void-accent/30 shadow-lg shadow-void-accent/5">
+          <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+            <span className="bg-void-accent/20 p-2 rounded-lg mr-3">
+              <span className="text-void-accent">✓</span>
+            </span>
+            Features
+          </h3>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-200">
             <li className="flex items-center">
-              <span className="text-void-accent mr-2">✓</span> Full Root Access
+              <span className="text-void-accent mr-2 bg-void-accent/10 p-1 rounded-full">✓</span> Full Root Access
             </li>
             <li className="flex items-center">
-              <span className="text-void-accent mr-2">✓</span> DDoS Protection
+              <span className="text-void-accent mr-2 bg-void-accent/10 p-1 rounded-full">✓</span> DDoS Protection
             </li>
             <li className="flex items-center">
-              <span className="text-void-accent mr-2">✓</span> 99.9% Uptime Guarantee
+              <span className="text-void-accent mr-2 bg-void-accent/10 p-1 rounded-full">✓</span> 99.9% Uptime Guarantee
             </li>
             <li className="flex items-center">
-              <span className="text-void-accent mr-2">✓</span> Flexible Billing
+              <span className="text-void-accent mr-2 bg-void-accent/10 p-1 rounded-full">✓</span> Flexible Billing
             </li>
             <li className="flex items-center">
-              <span className="text-red-500 mr-2">✕</span> No IPv4
+              <span className="text-red-500 mr-2 bg-red-500/10 p-1 rounded-full">✕</span> No IPv4
             </li>
             <li className="flex items-center">
-              <span className="text-void-accent mr-2">✓</span> Payment: Crypto Only, No Refunds
+              <span className="text-void-accent mr-2 bg-void-accent/10 p-1 rounded-full">✓</span> Payment: Crypto Only, No Refunds
             </li>
           </ul>
-        </motion.div>
+        </div>
         
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.9 }}
-          className="glass-card rounded-xl p-6"
-        >
-          <h3 className="text-xl font-bold text-white mb-4">System Specs</h3>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-300">
+        <div className="glass-card rounded-xl p-8 border border-void-accent/30 shadow-lg shadow-void-accent/5">
+          <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+            <span className="bg-void-accent/20 p-2 rounded-lg mr-3">
+              <span className="text-void-accent">✓</span>
+            </span>
+            System Specs
+          </h3>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-200">
             <li className="flex items-center">
-              <span className="text-void-accent mr-2">✓</span> 512GB DDR4 RAM / 28 Cores / 56 Threads
+              <span className="text-void-accent mr-2 bg-void-accent/10 p-1 rounded-full">✓</span> 512GB DDR4 RAM / 28 Cores / 56 Threads
             </li>
             <li className="flex items-center">
-              <span className="text-void-accent mr-2">✓</span> 2.5TB Disk
+              <span className="text-void-accent mr-2 bg-void-accent/10 p-1 rounded-full">✓</span> 2.5TB Disk
             </li>
             <li className="flex items-center">
-              <span className="text-void-accent mr-2">✓</span> Xeon E5-2680 v4 @ 2.40GHz
+              <span className="text-void-accent mr-2 bg-void-accent/10 p-1 rounded-full">✓</span> Xeon E5-2680 v4 @ 2.40GHz
             </li>
             <li className="flex items-center">
-              <span className="text-void-accent mr-2">✓</span> USA Hosting
+              <span className="text-void-accent mr-2 bg-void-accent/10 p-1 rounded-full">✓</span> USA Hosting
             </li>
           </ul>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
