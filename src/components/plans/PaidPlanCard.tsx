@@ -37,6 +37,10 @@ const PaidPlanCard = ({ name, price, ram, cpu, storage, index }: PlanProps) => {
     };
   }, [index]);
 
+  const handleBuyNow = () => {
+    window.open("https://discord.gg/vdx", "_blank");
+  };
+
   return (
     <div 
       ref={cardRef}
@@ -85,8 +89,11 @@ const PaidPlanCard = ({ name, price, ram, cpu, storage, index }: PlanProps) => {
         </div>
       </div>
       
-      <button className="mt-6 bg-void-accent/10 border border-void-accent/30 hover:bg-void-accent/20 hover:border-void-accent text-white font-medium py-2 px-4 rounded-md transition-all group-hover:neon-glow">
-        Select Plan
+      <button 
+        onClick={handleBuyNow}
+        className="mt-6 bg-void-accent/10 border border-void-accent/30 hover:bg-void-accent/20 hover:border-void-accent text-white font-medium py-2 px-4 rounded-md transition-all group-hover:neon-glow"
+      >
+        Buy Now
       </button>
       
       {/* Glow overlay */}
