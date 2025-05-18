@@ -54,13 +54,13 @@ const PlansSection = () => {
         {/* Plan toggle */}
         <PlanToggle activeTab={activeTab} setActiveTab={setActiveTab} />
         
-        {/* Plan sections */}
+        {/* Plan sections - updated to always be visible but with display control */}
         <div className="relative">
-          <div className={`transition-all duration-500 ${activeTab === 'paid' ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20 absolute inset-0 pointer-events-none'}`}>
+          <div className={`${activeTab === 'paid' ? 'block' : 'hidden'}`}>
             <PaidPlansSection />
           </div>
           
-          <div className={`transition-all duration-500 ${activeTab === 'free' ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20 absolute inset-0 pointer-events-none'}`}>
+          <div className={`${activeTab === 'free' ? 'block' : 'hidden'}`}>
             <FreeRewardsSection />
           </div>
         </div>
