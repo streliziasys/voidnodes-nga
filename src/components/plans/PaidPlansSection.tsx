@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef } from "react";
 import PaidPlanCard from "./PaidPlanCard";
+import { motion, useInView } from "framer-motion";
 
 const PAID_PLANS = [
   {
@@ -49,51 +50,40 @@ const PAID_PLANS = [
 
 const PaidPlansSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-background-pulse');
-        } else {
-          entry.target.classList.remove('animate-background-pulse');
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    observer.observe(sectionRef.current);
-    
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
-
   return (
     <div 
       ref={sectionRef}
-      className="relative z-10 opacity-0 animate-fade-in"
-      style={{ animationDelay: '150ms' }}
+      className="container mx-auto px-4 relative z-10 max-w-7xl"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {PAID_PLANS.map((plan, index) => (
-          <PaidPlanCard
+          <motion.div
             key={plan.name}
-            name={plan.name}
-            price={plan.price}
-            ram={plan.ram}
-            cpu={plan.cpu}
-            storage={plan.storage}
-            index={index}
-          />
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <PaidPlanCard
+              name={plan.name}
+              price={plan.price}
+              ram={plan.ram}
+              cpu={plan.cpu}
+              storage={plan.storage}
+              index={index}
+            />
+          </motion.div>
         ))}
       </div>
       
       <div className="mt-12 space-y-6">
-        <div className="glass-card rounded-xl p-6 opacity-0 animate-fade-in" style={{ animationDelay: '400ms' }}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="glass-card rounded-xl p-6"
+        >
           <h3 className="text-xl font-bold text-white mb-4">Features</h3>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-300">
             <li className="flex items-center">
@@ -115,9 +105,14 @@ const PaidPlansSection = () => {
               <span className="text-void-accent mr-2">✓</span> Payment: Crypto Only, No Refunds
             </li>
           </ul>
-        </div>
+        </motion.div>
         
-        <div className="glass-card rounded-xl p-6 opacity-0 animate-fade-in" style={{ animationDelay: '500ms' }}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.9 }}
+          className="glass-card rounded-xl p-6"
+        >
           <h3 className="text-xl font-bold text-white mb-4">System Specs</h3>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-300">
             <li className="flex items-center">
@@ -133,7 +128,7 @@ const PaidPlansSection = () => {
               <span className="text-void-accent mr-2">✓</span> USA Hosting
             </li>
           </ul>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
