@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom VoidNodes colors
+				void: {
+					background: '#0B0B0E',
+					card: '#1A1A1F',
+					accent: '#9F6BFF',
+					glow: '#D29CFF',
+					'dark-gray': '#252530',
+					'light-gray': '#38383F',
 				}
 			},
 			borderRadius: {
@@ -84,11 +94,60 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 8px 2px rgba(159, 107, 255, 0.3), 0 0 20px 4px rgba(159, 107, 255, 0.1)'
+					},
+					'50%': {
+						boxShadow: '0 0 12px 3px rgba(159, 107, 255, 0.5), 0 0 25px 6px rgba(159, 107, 255, 0.2)'
+					}
+				},
+				'glint': {
+					'0%': {
+						transform: 'translateX(-100%) rotate(45deg)'
+					},
+					'100%': {
+						transform: 'translateX(200%) rotate(45deg)'
+					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'slide-in-right': {
+					'0%': {
+						transform: 'translateX(30px)',
+						opacity: '0'
+					},
+					'100%': {
+						transform: 'translateX(0)',
+						opacity: '1'
+					}
+				},
+				'background-pulse': {
+					'0%, 100%': {
+						backgroundSize: '100% 100%'
+					},
+					'50%': {
+						backgroundSize: '105% 105%'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-glow': 'pulse-glow 2.5s ease-in-out infinite',
+				'glint': 'glint 2.5s ease-in-out infinite',
+				'fade-in': 'fade-in 0.5s ease-out forwards',
+				'slide-in-right': 'slide-in-right 0.5s ease-out forwards',
+				'background-pulse': 'background-pulse 8s ease-in-out infinite'
 			}
 		}
 	},
