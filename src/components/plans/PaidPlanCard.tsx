@@ -2,6 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { HardDrive, Cpu, MemoryStick } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface PlanProps {
   name: string;
@@ -18,65 +19,107 @@ const PaidPlanCard = ({ name, price, ram, cpu, storage, index }: PlanProps) => {
   };
 
   return (
-    <div 
+    <motion.div
+      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ 
+        duration: 0.6, 
+        delay: index * 0.1,
+        ease: "easeOut"
+      }}
+      whileHover={{ 
+        y: -10,
+        transition: { duration: 0.3 }
+      }}
       className={cn(
-        "glass-card rounded-xl p-6 flex flex-col",
-        "relative overflow-hidden border border-void-accent/30",
-        "shadow-lg shadow-void-accent/5",
-        "transition-all duration-300 hover:scale-[1.02]",
-        "hover:shadow-xl hover:shadow-void-accent/10",
-        "hover:border-void-accent/50 group"
+        "glass-card rounded-2xl p-8 flex flex-col relative overflow-hidden",
+        "border border-void-accent/30 hover:border-void-accent/60",
+        "shadow-xl shadow-void-accent/10 hover:shadow-void-accent/20",
+        "transition-all duration-500 group glint-effect"
       )}
     >
-      {/* Price tag */}
-      <div className="absolute -right-12 top-6 rotate-45 bg-void-accent text-white px-12 text-sm font-semibold shadow-md">
-        ${price}
-      </div>
-      
-      {/* Card content */}
-      <h3 className="text-xl md:text-2xl font-bold text-white mb-6 mt-2">
-        {name}
-        <div className="h-1 w-20 bg-gradient-to-r from-void-accent to-void-glow mt-3 rounded-full"></div>
-      </h3>
-      
-      <div className="flex-grow space-y-4">
-        {/* RAM */}
-        <div className="flex items-center space-x-3 text-gray-200">
-          <div className="p-2 rounded-md bg-void-dark-gray/60 border border-void-accent/20 group-hover:border-void-accent/40 transition-all">
-            <MemoryStick size={18} className="text-void-accent" />
-          </div>
-          <span className="text-lg">{ram} RAM</span>
-        </div>
-        
-        {/* CPU */}
-        <div className="flex items-center space-x-3 text-gray-200">
-          <div className="p-2 rounded-md bg-void-dark-gray/60 border border-void-accent/20 group-hover:border-void-accent/40 transition-all">
-            <Cpu size={18} className="text-void-accent" />
-          </div>
-          <span className="text-lg">{cpu}</span>
-        </div>
-        
-        {/* Storage */}
-        <div className="flex items-center space-x-3 text-gray-200">
-          <div className="p-2 rounded-md bg-void-dark-gray/60 border border-void-accent/20 group-hover:border-void-accent/40 transition-all">
-            <HardDrive size={18} className="text-void-accent" />
-          </div>
-          <span className="text-lg">{storage} disk</span>
-        </div>
-      </div>
-      
-      <button 
-        onClick={handleBuyNow}
-        className="mt-8 bg-void-accent/20 border-2 border-void-accent/40 hover:bg-void-accent/30 hover:border-void-accent/60 text-white font-medium py-3 px-6 rounded-lg transition-all group-hover:shadow-md shadow-void-accent/30 text-lg"
+      {/* Enhanced price tag */}
+      <motion.div 
+        initial={{ x: 50, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: index * 0.1 + 0.3 }}
+        className="absolute -right-12 top-8 rotate-45 bg-gradient-to-r from-void-accent to-void-glow text-white px-16 py-2 text-sm font-bold shadow-lg"
       >
-        Buy Now
-      </button>
+        ${price}
+      </motion.div>
       
       {/* Glow overlay */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500">
-        <div className="absolute inset-0 bg-void-accent opacity-5 blur-2xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-void-accent/5 to-void-glow/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+      
+      {/* Plan name with enhanced styling */}
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: index * 0.1 + 0.2 }}
+        className="relative z-10"
+      >
+        <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 mt-4 text-glow">
+          {name}
+          <motion.div 
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: index * 0.1 + 0.5, duration: 0.8 }}
+            className="h-1 w-24 bg-gradient-to-r from-void-accent to-void-glow mt-4 rounded-full"
+          />
+        </h3>
+      </motion.div>
+      
+      <div className="flex-grow space-y-6 relative z-10">
+        {/* Enhanced specs */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: index * 0.1 + 0.3 }}
+          className="flex items-center space-x-4 text-gray-200 hover-lift"
+        >
+          <div className="p-3 rounded-xl glass-card border border-void-accent/20 group-hover:border-void-accent/50 transition-all">
+            <MemoryStick size={20} className="text-void-accent cpu-spin" />
+          </div>
+          <span className="text-lg font-medium">{ram} RAM</span>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: index * 0.1 + 0.4 }}
+          className="flex items-center space-x-4 text-gray-200 hover-lift"
+        >
+          <div className="p-3 rounded-xl glass-card border border-void-accent/20 group-hover:border-void-accent/50 transition-all">
+            <Cpu size={20} className="text-void-accent hdd-pulse" />
+          </div>
+          <span className="text-lg font-medium">{cpu}</span>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: index * 0.1 + 0.5 }}
+          className="flex items-center space-x-4 text-gray-200 hover-lift"
+        >
+          <div className="p-3 rounded-xl glass-card border border-void-accent/20 group-hover:border-void-accent/50 transition-all sparkle">
+            <HardDrive size={20} className="text-void-accent" />
+          </div>
+          <span className="text-lg font-medium">{storage} disk</span>
+        </motion.div>
       </div>
-    </div>
+      
+      <motion.button 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.1 + 0.6 }}
+        onClick={handleBuyNow}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className="mt-8 glass-card border-2 border-void-accent/50 hover:border-void-accent text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:bg-void-accent/20 text-lg relative z-10 glint-effect hypnotic-glow"
+      >
+        Buy Now
+      </motion.button>
+    </motion.div>
   );
 };
 

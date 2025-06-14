@@ -114,7 +114,7 @@ export default {
 				'fade-in': {
 					'0%': {
 						opacity: '0',
-						transform: 'translateY(10px)'
+						transform: 'translateY(20px)'
 					},
 					'100%': {
 						opacity: '1',
@@ -131,13 +131,36 @@ export default {
 						opacity: '1'
 					}
 				},
-				'background-pulse': {
+				'scale-in': {
+					'0%': {
+						transform: 'scale(0.9)',
+						opacity: '0'
+					},
+					'100%': {
+						transform: 'scale(1)',
+						opacity: '1'
+					}
+				},
+				'glow-pulse': {
 					'0%, 100%': {
-						backgroundSize: '100% 100%'
+						boxShadow: '0 0 5px rgba(159, 107, 255, 0.3), 0 0 10px rgba(159, 107, 255, 0.2), 0 0 15px rgba(159, 107, 255, 0.1)'
 					},
 					'50%': {
-						backgroundSize: '105% 105%'
+						boxShadow: '0 0 10px rgba(159, 107, 255, 0.5), 0 0 20px rgba(159, 107, 255, 0.3), 0 0 30px rgba(159, 107, 255, 0.2)'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+					'50%': { transform: 'translateY(-20px) rotate(180deg)' }
+				},
+				'float-reverse': {
+					'0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+					'50%': { transform: 'translateY(20px) rotate(-180deg)' }
+				},
+				'text-shimmer': {
+					'0%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' },
+					'100%': { backgroundPosition: '0% 50%' }
 				}
 			},
 			animation: {
@@ -145,9 +168,13 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'pulse-glow': 'pulse-glow 2.5s ease-in-out infinite',
 				'glint': 'glint 2.5s ease-in-out infinite',
-				'fade-in': 'fade-in 0.5s ease-out forwards',
-				'slide-in-right': 'slide-in-right 0.5s ease-out forwards',
-				'background-pulse': 'background-pulse 8s ease-in-out infinite'
+				'fade-in': 'fade-in 0.6s ease-out forwards',
+				'slide-in-right': 'slide-in-right 0.6s ease-out forwards',
+				'scale-in': 'scale-in 0.5s ease-out forwards',
+				'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+				'float': 'float 6s ease-in-out infinite',
+				'float-reverse': 'float-reverse 8s ease-in-out infinite',
+				'text-shimmer': 'text-shimmer 3s ease-in-out infinite'
 			}
 		}
 	},

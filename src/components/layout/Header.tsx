@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,91 +27,124 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when changing routes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
   return (
-    <header 
+    <motion.header 
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled 
-          ? "py-3 bg-void-background/90 backdrop-blur-md border-b border-void-accent/20 shadow-md" 
+          ? "py-3 glass-nav shadow-lg shadow-void-accent/10" 
           : "py-5 bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold text-white font-space-grotesk">
-            Void<span className="text-void-accent">Nodes</span>
-          </span>
+        <Link to="/" className="flex items-center space-x-2 group">
+          <motion.span 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="text-2xl font-bold text-white font-space-grotesk relative"
+          >
+            Void<span className="text-void-accent animated-gradient bg-clip-text text-transparent">Nodes</span>
+            <div className="absolute -inset-1 bg-gradient-to-r from-void-accent/20 to-void-glow/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </motion.span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-8">
-          {routes.map((route) => (
-            <Link
+          {routes.map((route, index) => (
+            <motion.div
               key={route.path}
-              to={route.path}
-              className={cn(
-                "text-sm font-medium transition-all relative py-2",
-                location.pathname === route.path 
-                  ? "text-void-accent" 
-                  : "text-gray-300 hover:text-white"
-              )}
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              {route.name}
-              <span 
+              <Link
+                to={route.path}
                 className={cn(
-                  "absolute bottom-0 left-0 w-full h-0.5 bg-void-accent transform transition-transform duration-300",
-                  location.pathname === route.path ? "scale-x-100" : "scale-x-0"
+                  "text-sm font-medium transition-all relative py-2 px-3 rounded-lg glint-effect hover-lift",
+                  location.pathname === route.path 
+                    ? "text-void-accent bg-void-accent/10 neon-glow" 
+                    : "text-gray-300 hover:text-white hover:bg-void-accent/5"
                 )}
-              ></span>
-            </Link>
+              >
+                {route.name}
+                <motion.span 
+                  className={cn(
+                    "absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-void-accent to-void-glow transform transition-transform duration-300 rounded-full",
+                    location.pathname === route.path ? "scale-x-100" : "scale-x-0"
+                  )}
+                  whileHover={{ scaleX: 1 }}
+                ></motion.span>
+              </Link>
+            </motion.div>
           ))}
         </nav>
 
         {/* Mobile menu button */}
-        <button 
+        <motion.button 
+          whileTap={{ scale: 0.9 }}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="lg:hidden p-2 text-white focus:outline-none"
+          className="lg:hidden p-2 text-white focus:outline-none hover-lift"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMenuOpen ? (
-            <X size={24} className="text-void-accent" />
-          ) : (
-            <Menu size={24} />
-          )}
-        </button>
+          <motion.div
+            animate={{ rotate: isMenuOpen ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {isMenuOpen ? (
+              <X size={24} className="text-void-accent" />
+            ) : (
+              <Menu size={24} />
+            )}
+          </motion.div>
+        </motion.button>
       </div>
 
       {/* Mobile Navigation */}
-      <div 
-        className={cn(
-          "fixed inset-0 bg-void-background/95 backdrop-blur-lg z-40 lg:hidden transition-all duration-300 flex flex-col pt-20",
-          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none -translate-y-8"
-        )}
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ 
+          opacity: isMenuOpen ? 1 : 0,
+          y: isMenuOpen ? 0 : -20,
+          pointerEvents: isMenuOpen ? "auto" : "none"
+        }}
+        transition={{ duration: 0.3 }}
+        className="fixed inset-0 glass-nav z-40 lg:hidden flex flex-col pt-20"
       >
-        <nav className="flex flex-col items-center space-y-8 p-8">
-          {routes.map((route) => (
-            <Link
+        <nav className="flex flex-col items-center space-y-6 p-8">
+          {routes.map((route, index) => (
+            <motion.div
               key={route.path}
-              to={route.path}
-              className={cn(
-                "text-xl font-medium transition-all relative py-2 px-4",
-                location.pathname === route.path 
-                  ? "text-void-accent" 
-                  : "text-gray-300 hover:text-white"
-              )}
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ 
+                x: isMenuOpen ? 0 : -50,
+                opacity: isMenuOpen ? 1 : 0
+              }}
+              transition={{ delay: index * 0.1, duration: 0.3 }}
             >
-              {route.name}
-            </Link>
+              <Link
+                to={route.path}
+                className={cn(
+                  "text-xl font-medium transition-all relative py-3 px-6 rounded-xl glint-effect hover-lift",
+                  location.pathname === route.path 
+                    ? "text-void-accent bg-void-accent/20 neon-glow" 
+                    : "text-gray-300 hover:text-white hover:bg-void-accent/10"
+                )}
+              >
+                {route.name}
+              </Link>
+            </motion.div>
           ))}
         </nav>
-      </div>
-    </header>
+      </motion.div>
+    </motion.header>
   );
 };
 
