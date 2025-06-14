@@ -7,9 +7,16 @@ interface TypewriterTextProps {
   className?: string;
   delay?: number;
   speed?: number;
+  disableUnderline?: boolean; // new prop
 }
 
-const TypewriterText = ({ text, className = '', delay = 0, speed = 50 }: TypewriterTextProps) => {
+const TypewriterText = ({
+  text,
+  className = '',
+  delay = 0,
+  speed = 50,
+  disableUnderline = false,
+}: TypewriterTextProps) => {
   const [displayText, setDisplayText] = useState('');
   const [isComplete, setIsComplete] = useState(false);
 
@@ -33,7 +40,7 @@ const TypewriterText = ({ text, className = '', delay = 0, speed = 50 }: Typewri
   }, [text, delay, speed]);
 
   return (
-    <div className={className}>
+    <div className={className} style={{minHeight: '1em', lineHeight: 1.2}}>
       <span className="text-glow">{displayText}</span>
       {!isComplete && (
         <motion.span
@@ -44,7 +51,8 @@ const TypewriterText = ({ text, className = '', delay = 0, speed = 50 }: Typewri
           |
         </motion.span>
       )}
-      {isComplete && (
+      {/* Only show underline if not disabled */}
+      {isComplete && !disableUnderline && (
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -57,3 +65,4 @@ const TypewriterText = ({ text, className = '', delay = 0, speed = 50 }: Typewri
 };
 
 export default TypewriterText;
+

@@ -90,12 +90,13 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="mb-8">
+            <div className="mb-8 min-h-[4.5rem] md:min-h-[7.5rem] flex items-center justify-center">
               <TypewriterText
                 text="Void Node"
-                className="text-5xl md:text-7xl lg:text-8xl font-bold font-space-grotesk"
+                className="text-5xl md:text-7xl lg:text-8xl font-bold font-space-grotesk tracking-tight"
                 delay={500}
                 speed={100}
+                disableUnderline   // Prevent the underline for the main title
               />
             </div>
             
