@@ -92,7 +92,7 @@ const HeroSection = () => {
           >
             <div className="mb-8">
               <TypewriterText
-                text="Voidnodes"
+                text="Void Node"
                 className="text-5xl md:text-7xl lg:text-8xl font-bold font-space-grotesk"
                 delay={500}
                 speed={100}

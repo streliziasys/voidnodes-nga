@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="flex items-center space-x-2">
               <span className="text-xl font-bold text-white font-space-grotesk">
-                Void<span className="text-void-accent">Nodes</span>
+                Void<span className="text-void-accent"> Node</span>
               </span>
             </Link>
             <p className="text-gray-400 text-sm">
@@ -72,7 +72,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 pt-4 border-t border-void-accent/10 text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} VoidNodes. All rights reserved.
+          &copy; {new Date().getFullYear()} Void Node. All rights reserved.
         </div>
       </div>
     </footer>

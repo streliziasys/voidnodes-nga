@@ -15,7 +15,7 @@ const AboutPage = () => {
             transition={{ duration: 0.5 }}
             className="text-4xl md:text-5xl font-bold mb-4 font-space-grotesk"
           >
-            About <span className="text-void-accent">Voidnodes</span>
+            About <span className="text-void-accent">Void Node</span>
           </motion.h1>
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
@@ -45,7 +45,7 @@ const AboutPage = () => {
         >
           <h2 className="text-2xl font-bold mb-4">Our Story</h2>
           <p className="text-gray-300 mb-6">
-            Voidnodes began with a simple idea: make powerful VPS hosting accessible to everyone. 
+            Void Node began with a simple idea: make powerful VPS hosting accessible to everyone. 
             In a market dominated by expensive solutions with complex pricing structures, we 
             wanted to create something different - a hosting service that offers both free and 
             affordable paid options without compromising on quality.

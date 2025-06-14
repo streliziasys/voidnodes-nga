@@ -51,7 +51,7 @@ const Header = () => {
             whileTap={{ scale: 0.95 }}
             className="text-2xl font-bold text-white font-space-grotesk relative"
           >
-            Void<span className="text-void-accent animated-gradient bg-clip-text text-transparent">Nodes</span>
+            Void<span className="text-void-accent animated-gradient bg-clip-text text-transparent"> Node</span>
             <div className="absolute -inset-1 bg-gradient-to-r from-void-accent/20 to-void-glow/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </motion.span>
         </Link>
