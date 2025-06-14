@@ -1,8 +1,8 @@
-
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
 import FreeRewardCard from "./FreeRewardCard";
-import { ChevronDown } from "lucide-react";
+import SectionTabs from "@/components/ui/SectionTabs";
+import NoticeCard from "@/components/ui/NoticeCard";
+import { motion, AnimatePresence } from "framer-motion";
 
 const INVITE_REWARDS = [
   {
@@ -83,36 +83,48 @@ const BOOST_REWARDS = [
 const FreeRewardsSection = () => {
   const [activeSection, setActiveSection] = useState<'invite' | 'boost' | 'both'>('both');
 
+  const inviteNotices = [
+    { type: 'error' as const, text: 'No IPv4 included' },
+    { type: 'success' as const, text: 'Rewards can be stacked for more resources' },
+    { type: 'info' as const, text: 'VoidNodes reserves right to revoke if terms are violated' }
+  ];
+
+  const boostNotices = [
+    { type: 'error' as const, text: 'No IPv4 included' },
+    { type: 'success' as const, text: 'Alternative accounts allowed for boosting' },
+    { type: 'success' as const, text: 'Lifetime VPS access even after boost expires' },
+    { type: 'info' as const, text: 'Subject to revocation if abused' }
+  ];
+
   return (
-    <div className="relative z-10 space-y-8 opacity-0 animate-fade-in" style={{ animationDelay: '150ms' }}>
-      {/* Collapsible sections */}
-      <div className="space-y-6">
-        {/* Invite Rewards Section */}
-        <div className="glass-card rounded-xl overflow-hidden">
-          <button 
-            onClick={() => setActiveSection(activeSection === 'invite' ? 'both' : 'invite')}
-            className="w-full flex justify-between items-center p-4 bg-void-dark-gray/50 hover:bg-void-dark-gray/70 transition-colors"
-          >
-            <h3 className="text-lg font-bold text-white">Invite Rewards</h3>
-            <ChevronDown 
-              size={20} 
-              className={cn(
-                "text-void-accent transition-transform duration-300",
-                (activeSection === 'invite' || activeSection === 'both') && "rotate-180"
-              )} 
-            />
-          </button>
-          
-          <div 
-            className={cn(
-              "transition-all duration-300 overflow-hidden",
-              (activeSection === 'invite' || activeSection === 'both') 
-                ? "max-h-[2000px] opacity-100" 
-                : "max-h-0 opacity-0"
-            )}
-          >
-            <div className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    <div className="relative z-10 space-y-12 pb-20">
+      <SectionTabs 
+        activeSection={activeSection} 
+        onSectionChange={setActiveSection} 
+      />
+
+      <div className="container mx-auto px-4">
+        <AnimatePresence mode="wait">
+          {/* Invite Rewards Section */}
+          {(activeSection === 'invite' || activeSection === 'both') && (
+            <motion.div
+              key="invite"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="mb-16"
+            >
+              <motion.h2
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-3xl font-bold text-white mb-8 text-center font-chakra-petch"
+              >
+                Invite Rewards Program
+              </motion.h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
                 {INVITE_REWARDS.map((reward, index) => (
                   <FreeRewardCard
                     key={reward.title}
@@ -126,53 +138,30 @@ const FreeRewardsSection = () => {
                 ))}
               </div>
               
-              <div className="mt-4 p-4 border border-void-accent/20 bg-void-dark-gray/30 rounded-lg text-gray-300 text-sm">
-                <h4 className="font-semibold mb-2 text-white">Notice</h4>
-                <ul className="space-y-1">
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">✕</span> 
-                    <span>No IPv4</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-void-accent mr-2">✓</span> 
-                    <span>Rewards can be stacked</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-void-accent mr-2">ℹ</span> 
-                    <span>Voidnodes reserves right to revoke if needed</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Boost Rewards Section */}
-        <div className="glass-card rounded-xl overflow-hidden">
-          <button 
-            onClick={() => setActiveSection(activeSection === 'boost' ? 'both' : 'boost')}
-            className="w-full flex justify-between items-center p-4 bg-void-dark-gray/50 hover:bg-void-dark-gray/70 transition-colors"
-          >
-            <h3 className="text-lg font-bold text-white">Boost Rewards</h3>
-            <ChevronDown 
-              size={20} 
-              className={cn(
-                "text-void-accent transition-transform duration-300",
-                (activeSection === 'boost' || activeSection === 'both') && "rotate-180"
-              )} 
-            />
-          </button>
+              <NoticeCard title="Invite Program Terms" items={inviteNotices} />
+            </motion.div>
+          )}
           
-          <div 
-            className={cn(
-              "transition-all duration-300 overflow-hidden",
-              (activeSection === 'boost' || activeSection === 'both') 
-                ? "max-h-[1000px] opacity-100" 
-                : "max-h-0 opacity-0"
-            )}
-          >
-            <div className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {/* Boost Rewards Section */}
+          {(activeSection === 'boost' || activeSection === 'both') && (
+            <motion.div
+              key="boost"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, delay: activeSection === 'both' ? 0.3 : 0 }}
+              className="mb-16"
+            >
+              <motion.h2
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-3xl font-bold text-white mb-8 text-center font-chakra-petch"
+              >
+                Discord Boost Rewards
+              </motion.h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 {BOOST_REWARDS.map((reward, index) => (
                   <FreeRewardCard
                     key={reward.title}
@@ -186,30 +175,10 @@ const FreeRewardsSection = () => {
                 ))}
               </div>
               
-              <div className="mt-4 p-4 border border-void-accent/20 bg-void-dark-gray/30 rounded-lg text-gray-300 text-sm">
-                <h4 className="font-semibold mb-2 text-white">Notice</h4>
-                <ul className="space-y-1">
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">✕</span> 
-                    <span>No IPv4</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-void-accent mr-2">✓</span> 
-                    <span>Alt boosts allowed</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-void-accent mr-2">✓</span> 
-                    <span>Lifetime VPS even after boost ends</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-void-accent mr-2">ℹ</span> 
-                    <span>Revocable if abused</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+              <NoticeCard title="Boost Program Terms" items={boostNotices} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
