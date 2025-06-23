@@ -26,7 +26,7 @@ const Footer = () => {
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <span className="text-xl font-black text-white tracking-tight">
-                Void<span className="gradient-text">Node</span>
+                Void<span className="gradient-text">Nodes</span>
               </span>
             </div>
             <p className="text-slate-400 leading-relaxed">
@@ -35,7 +35,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <motion.a
-                href="mailto:support@voidnodes.xyz"
+                href="mailto:admin@voidhost.pro"
                 whileHover={{ scale: 1.1, y: -2 }}
                 className="glass-card p-3 rounded-xl hover:bg-white/5 transition-all duration-300"
               >
@@ -151,7 +151,7 @@ const Footer = () => {
           className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p className="text-slate-500 text-sm">
-            &copy; {currentYear} VoidNode. All rights reserved.
+            &copy; {currentYear} VoidNodes. All rights reserved.
           </p>
           <div className="flex items-center gap-2 text-slate-500 text-sm">
             <span>Made with</span>

@@ -50,7 +50,7 @@ const HeroSection = () => {
           >
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tight mb-6">
               <span className="gradient-text">Void</span>
-              <span className="text-white">Node</span>
+              <span className="text-white">Nodes</span>
             </h1>
           </motion.div>
           

@@ -19,7 +19,7 @@ const AboutPage = () => {
           
           <div className="text-center mb-16">
             <TypewriterText
-              text="About Void Node"
+              text="About Void Nodes"
               className="text-4xl md:text-6xl font-bold mb-6 font-space-grotesk"
               speed={80}
             />
@@ -58,7 +58,7 @@ const AboutPage = () => {
             
             <div className="space-y-6 text-gray-300 leading-relaxed">
               <p className="text-lg">
-                Void Node began with a simple idea: make powerful VPS hosting accessible to everyone. 
+                Void Nodes began with a simple idea: make powerful VPS hosting accessible to everyone. 
                 In a market dominated by expensive solutions with complex pricing structures, we 
                 wanted to create something different - a hosting service that offers both free and 
                 affordable paid options without compromising on quality.

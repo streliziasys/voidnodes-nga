@@ -97,7 +97,7 @@ const ContactSection = () => {
             icon={<Mail size={28} className="text-void-accent" />}
             title="Email Support"
             description="Get help with your VPS, account, or payment issues via email."
-            link="mailto:support@voidnodes.xyz"
+            link="mailto:admin@voidhost.pro"
             linkText="Email Us"
             delay={0.6}
           />

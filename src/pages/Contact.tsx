@@ -67,10 +67,10 @@ const ContactPage = () => {
                   <div className="flex-1">
                     <h3 className="font-semibold text-lg mb-2 text-white">Email Support</h3>
                     <a 
-                      href="mailto:support@voidnodes.xyz" 
+                      href="mailto:admin@voidhost.pro" 
                       className="text-gray-300 hover:text-void-accent transition-colors text-lg"
                     >
-                      support@voidnodes.xyz
+                      admin@voidhost.pro
                     </a>
                     <p className="mt-2 text-sm text-gray-400">
                       We'll respond within 24 hours

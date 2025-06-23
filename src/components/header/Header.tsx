@@ -61,7 +61,7 @@ const Header = () => {
               whileHover={{ x: 2 }}
               className="text-2xl font-black text-white tracking-tight"
             >
-              Void<span className="gradient-text">Node</span>
+              Void<span className="gradient-text">Nodes</span>
             </motion.span>
           </Link>
 

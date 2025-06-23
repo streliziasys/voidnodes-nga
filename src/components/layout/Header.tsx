@@ -53,7 +53,7 @@ const Header = () => {
           >
             Void{' '}
             <span className="text-void-accent bg-gradient-to-r from-void-accent to-void-glow bg-clip-text text-transparent">
-              Node
+              Nodes
             </span>
             <div className="absolute -inset-1 bg-gradient-to-r from-void-accent/20 to-void-glow/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </motion.span>
